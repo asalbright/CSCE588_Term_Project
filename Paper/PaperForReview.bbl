@@ -1,0 +1,177 @@
+\begin{thebibliography}{10}\itemsep=-1pt
+
+\bibitem{Ahmadi1997}
+Mojtaba Ahmadi and Martin Buehler.
+\newblock {Stable control of a simulated one-legged running robot with hip and
+  leg compliance}.
+\newblock {\em IEEE Transactions on Robotics and Automation}, 13(1):96--104,
+  1997.
+
+\bibitem{Bhagat2019e}
+Sarthak Bhagat, Hritwick Banerjee, Zion Tsz~Ho Tse, and Hongliang Ren.
+\newblock {Deep reinforcement learning for soft, flexible robots: Brief review
+  with impending challenges}.
+\newblock {\em Robotics}, 8(1):1--36, 2019.
+
+\bibitem{Blickhan1993a}
+R. Blickhan and R.~J. Full.
+\newblock {Similarity in multilegged locomotion: Bouncing like a monopode}.
+\newblock {\em Journal of Comparative Physiology A}, 173(5):509--517, 1993.
+
+\bibitem{Brockman2016c}
+Greg Brockman, Vicki Cheung, Ludwig Pettersson, Jonas Schneider, John Schulman,
+  Jie Tang, and Wojciech Zaremba.
+\newblock {OpenAI Gym}.
+\newblock pages 1--4, 2016.
+
+\bibitem{Buondonno2017}
+Gabriele Buondonno, Justin Carpentier, Guilhem Saurel, Nicolas Mansard,
+  Alessandro {De Luca}, and Jean~Paul Laumond.
+\newblock {Actuator design of compliant walkers via optimal control}.
+\newblock {\em IEEE International Conference on Intelligent Robots and
+  Systems}, 2017-Septe:705--711, 2017.
+
+\bibitem{Chen2020}
+Tianjian Chen, Zhanpeng He, and Matei Ciocarlie.
+\newblock {Hardware as Policy: Mechanical and computational co-optimization
+  using deep reinforcement learning}.
+\newblock {\em arXiv}, (CoRL), 2020.
+
+\bibitem{stable-baselines3}
+Antonin~Raffin Dormann, Ashley Hill, Adam Gleave, Anssi Kanervisto, Maximilian
+  Ernestus, and Noah.
+\newblock {Stable-Baselines3: Reliable Reinforcement Learning Implementations}.
+\newblock {\em Journal of Machine Learning Research}, 22(22):1--8, 2021.
+
+\bibitem{Dwiel2019d}
+Zach Dwiel, Madhavun Candadai, and Mariano Phielipp.
+\newblock {On Training Flexible Robots using Deep Reinforcement Learning}.
+\newblock {\em IEEE International Conference on Intelligent Robots and
+  Systems}, pages 4666--4671, 2019.
+
+\bibitem{Fujimoto2018d}
+Scott Fujimoto, Herke {Van Hoof}, and David Meger.
+\newblock {Addressing Function Approximation Error in Actor-Critic Methods}.
+\newblock {\em 35th International Conference on Machine Learning, ICML 2018},
+  4:2587--2601, 2018.
+
+\bibitem{Ha2019j}
+David Ha.
+\newblock {Reinforcement learning for improving agent design}.
+\newblock {\em Artificial Life}, 25(4):352--365, 2019.
+
+\bibitem{He2020f}
+Wei He, Hejia Gao, Chen Zhou, Chenguang Yang, and Zhijun Li.
+\newblock {Reinforcement Learning Control of a Flexible Two-Link Manipulator:
+  An Experimental Investigation}.
+\newblock {\em IEEE Transactions on Systems, Man, and Cybernetics: Systems},
+  pages 1--11, 2020.
+
+\bibitem{Hurst2008}
+Jonathan Hurst.
+\newblock {The Role and Implementation of Compliance in Legged Locomotion}.
+\newblock {\em The International Journal of Robotics Research}, 25(4):110,
+  2008.
+
+\bibitem{Iida2005}
+Fumiya Iida, Gabriel G{\'{o}}mez, and Rolf Pfeifer.
+\newblock {Exploiting body dynamics for controlling a running quadruped robot}.
+\newblock {\em 2005 International Conference on Advanced Robotics, ICAR '05,
+  Proceedings}, 2005:229--235, 2005.
+
+\bibitem{Li2001}
+Q. Li, W.~J. Zhang, and L. Chen.
+\newblock {Design for control - A concurrent engineering approach for
+  mechatronic systems design}.
+\newblock {\em IEEE/ASME Transactions on Mechatronics}, 6(2):161--169, 2001.
+
+\bibitem{Lillicrap2016h}
+Timothy~P. Lillicrap, Jonathan~J. Hunt, Alexander Pritzel, Nicolas Heess, Tom
+  Erez, Yuval Tassa, David Silver, and Daan Wierstra.
+\newblock {Continuous control with deep reinforcement learning}.
+\newblock {\em 4th International Conference on Learning Representations, ICLR
+  2016 - Conference Track Proceedings}, 2016.
+
+\bibitem{Luo1993}
+Zheng-hua Luo.
+\newblock {Direct Strain Feedback Control of Flexible Robot Arms: New
+  Theoretical and Experimental Results}.
+\newblock 38(11), 1993.
+
+\bibitem{Modeling2003}
+A~Mathematical Modeling.
+\newblock {Gain Adaptive Nonlinear Feedback Control of Flexible SCARA /
+  Cartesian Robots}.
+\newblock (AIM):1423--1428, 2003.
+
+\bibitem{Pratt1995}
+Gill~A. Pratt and Matthew~M. Williamson.
+\newblock {Series elastic actuators}.
+\newblock {\em IEEE International Conference on Intelligent Robots and
+  Systems}, 1:399--406, 1995.
+
+\bibitem{Saranli2001}
+U Saranli, M Buehler, and D~E Koditschek.
+\newblock {RHex: A Simple and Highly Mobile Robot}.
+\newblock {\em International Journal of Robotics Research}, 20(7):616--631,
+  2001.
+
+\bibitem{Schaff2019e}
+Charles Schaff, David Yunis, Ayan Chakrabarti, and Matthew~R. Walter.
+\newblock {Jointly learning to construct and control agents using deep
+  reinforcement learning}.
+\newblock {\em Proceedings - IEEE International Conference on Robotics and
+  Automation}, 2019-May:9798--9805, 2019.
+
+\bibitem{Schulman2017f}
+John Schulman, Filip Wolski, Prafulla Dhariwal, Alec Radford, and Oleg Klimov.
+\newblock {Proximal Policy Optimization Algorithms}.
+\newblock pages 1--12, 2017.
+
+\bibitem{Singer:90}
+N~C Singer and W~P Seering.
+\newblock {Preshaping Command Inputs to Reduce System Vibration}.
+\newblock {\em Journal of Dynamic Systems, Measurement, and Control},
+  112(1):76--82, 1990.
+
+\bibitem{Singhose:94a}
+W Singhose, W Seering, and N Singer.
+\newblock {Residual Vibration Reduction Using Vector Diagrams to Generate
+  Shaped Inputs}.
+\newblock {\em Journal of Mechanical Design}, 116(2):654--659, 1994.
+
+\bibitem{Sorensen2008CommandinducedVA}
+Khalid~L Sorensen and William~E Singhose.
+\newblock {Command-induced vibration analysis using input shaping principles}.
+\newblock {\em Autom.}, 44:2392--2397, 2008.
+
+\bibitem{Sugiyama2004}
+Yuuta Sugiyama and Shinichi Hirai.
+\newblock {Crawling and jumping of deformable soft robot}.
+\newblock {\em 2004 IEEE/RSJ International Conference on Intelligent Robots and
+  Systems (IROS)}, 4(c):3276--3281, 2004.
+
+\bibitem{Thuruthelb}
+Thomas~George Thuruthel, Egidio Falotico, Federico Renda, and Cecilia Laschi.
+\newblock {Model Based Reinforcement Learning for Closed Loop Dynamic Control
+  of Soft Robotic Manipulators}.
+\newblock {\em IEEE Transactions on Robotics}, 35:124--134, 2019.
+
+\bibitem{Vaughan2013}
+Joshua Vaughan.
+\newblock {Jumping Commands For Flexible-Legged Robots}.
+\newblock 2013.
+
+\bibitem{Wang2019}
+Tingwu Wang, Yuhao Zhou, Sanja Fidler, and Jimmy Ba.
+\newblock {Neural graph evolution: Towards efficient automatic robot design}.
+\newblock {\em arXiv}, pages 1--17, 2019.
+
+\bibitem{Zhang2019}
+Ting Zhang and He Huang.
+\newblock {Design and Control of a Series Elastic Actuator with Clutch for Hip
+  Exoskeleton for Precise Assistive Magnitude and Timing Control and Improved
+  Mechanical Safety}.
+\newblock {\em IEEE/ASME Transactions on Mechatronics}, 24(5):2215--2226, 2019.
+
+\end{thebibliography}
