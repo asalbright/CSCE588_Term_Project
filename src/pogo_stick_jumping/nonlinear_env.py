@@ -27,7 +27,7 @@ import numpy as np
 from scipy.integrate import solve_ivp
 import datetime # for unique filenames
 from pathlib import Path
-from stable_baselines3.common.logger import record
+#from stable_baselines3.common.logger import record
 from pogo_stick_jumping.ODE_Nonlinear import PogoODEnonlinear
 
 logger = logging.getLogger(__name__)

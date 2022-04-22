@@ -39,10 +39,13 @@ except:
 # Model Parameters
 REWARD_FUNCTION = 'RewardHeight'    # 'RewardHeight', 'RewardSpecifiedHeight', 'RewardEfficiency'
 MODEL_TYPE = 'TD3'
-LEARNING_RATE = 0.01
+LEARNING_RATE = 0.02
 GAMMA = 0.99
-ROLLOUT = 10            # For TD3
+ROLLOUT = 100           # For TD3
 TOTAL_SIMS = 1000
+
+batch_size=75 #for PPO
+n_steps=50 #for PPO
 
 # Design space parameters
 SPRING_K = 5760
@@ -54,12 +57,12 @@ MIN_ZETA = ZETA - VARIANCE * ZETA
 MAX_ZETA = ZETA + VARIANCE * ZETA
 
 # Training Parameters
-NUM_TRIALS = 10         # number of seeds to test
-MULTIPROCESS = False    # do you want to multiprocess the different seeds?
-NUM_CORES = 2           # How many cores do you want to use?
+NUM_TRIALS = 10    # number of seeds to test
+MULTIPROCESS = True    # do you want to multiprocess the different seeds?
+NUM_CORES = 2        # How many cores do you want to use?
 
 # Set up the training seeds
-INITIAL_SEED = 70504
+INITIAL_SEED = 70503
 RNG = np.random.default_rng(INITIAL_SEED)
 TRIAL_SEEDS = RNG.integers(low=0, high=10000, size=(NUM_TRIALS))
 
@@ -106,8 +109,8 @@ def train_agents(seed=12345):
     elif MODEL_TYPE == 'PPO':
         model = PPO("MlpPolicy",
                     env,
-                    n_steps=100,
-                    batch_size=50,
+                    n_steps=n_steps,
+                    batch_size=batch_size,
                     learning_rate=LEARNING_RATE,
                     clip_range=0.2,
                     verbose=1,
@@ -118,7 +121,8 @@ def train_agents(seed=12345):
     callback = LogMechParamsCallback()
     # TODO: Change log the name to whatever you want
     # OPEN tensorboard with the following bash command: tensorboard --logdir ./logs/
-    model.learn(total_timesteps=TOTAL_SIMS, callback=callback, tb_log_name=f'{MODEL_TYPE}_{LEARNING_RATE}_{int(seed)}')
+    #model.learn(total_timesteps=TOTAL_SIMS, callback=callback, tb_log_name=f'{MODEL_TYPE}_{LEARNING_RATE}_{batch_size}_{n_steps}_{int(seed)}')
+    model.learn(total_timesteps=TOTAL_SIMS, callback=callback, tb_log_name=f'{MODEL_TYPE}_{ROLLOUT}_{int(seed)}')
 
 # Set up the training multiprocess
 def multi_process(function, i, n_processors):

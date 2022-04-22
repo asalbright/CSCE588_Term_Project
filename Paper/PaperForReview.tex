@@ -230,7 +230,7 @@ The training hyperparameters were selected based on the algorithm author recomme
         \begin{center}
         \begin{tabular}{|c||c|}
         \hline
-        Hyperameter                     & Value                           \\
+        Hyperparameter                     & Value                           \\
         \hline
         Learning Rate, $\alpha$         & 0.001                           \\
         Learning Starts                 & 100 Steps                       \\
@@ -250,6 +250,36 @@ The training hyperparameters were selected based on the algorithm author recomme
         \vspace{-5mm}
 \end{table}
 %
+%
+\begin{table}[t]
+        \caption{PPO Training Hyperparameters}
+        \vspace{-4mm}
+        \label{tab:training_hyperameters_PPO}
+        \begin{center}
+        \begin{tabular}{|c||c|}
+        \hline
+        Hyperparameter                  & Value                           \\
+        \hline
+        Learning Rate, $\alpha$         & 0.001                           \\
+        Batch Size                      & 64                              \\
+        Clip Range, $\epsilon $         & 0.2                             \\
+        Gamma, $\gamma$                 & 0.99                            \\
+        GAE-Lambda,                     & 0.95                            \\
+        Training Frequency              & 1:Episode                       \\
+        Gradient Steps                  & $\propto$ Training Frequency    \\
+        Policy Delay                    & 1 : 2 Q-Function Updates        \\
+        Target Policy Noise, $\epsilon$ & 0.2                             \\
+        Target Policy Clip, $c$         & 0.5                             \\
+        Seed                            & 100 Random Seeds                \\
+        \hline
+        \end{tabular}
+        \end{center}
+        \vspace{-5mm}
+\end{table}
+%
+
+The training hyperparameters for PPO found in Table~\ref{tab:training_hyperameters_PPO} were set similarly to TD3's. All the PPO hyperameters, other than learning rate and N-steps, were set according to the algorithm's author and StableBaselines3's recommendations.
+The learning rate and N-steps were adjusted as the algorithm was not able to converge within 1000 episodes given the initial hyperparameter values of 0.0003 and 2048. 
 
 \todo[inline]{Make a hyperameters table for PPO.}
 

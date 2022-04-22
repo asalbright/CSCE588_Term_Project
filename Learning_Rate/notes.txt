@@ -1,0 +1,3 @@
+check td3 and ppo learning rates. First set of PPO data was formated ppo_learningrate_seed_ this set has N_step size 100
+second batch is formated ppo_learningrate_nstep_seed_ this set is updated 20times over the 1k ep. instead of 10. this
+allows the PPO algo to converge in similar #ep. as td3 for same learning rate.
