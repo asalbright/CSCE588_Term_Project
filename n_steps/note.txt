@@ -1,0 +1,2 @@
+compares the N-steps at 75 batchsize (close enough to 64 imo) at 0.02 learning rate, also checked .005 learning rate of nstep=10 to see if a lower learning rate would improve
+performance

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2022.3.7)  21 APR 2022 15:28
+This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2022.3.7)  21 APR 2022 22:07
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -792,68 +792,68 @@ LaTeX Warning: Citation `Schulman2017f' on page 3 undefined on input line 222.
 LaTeX Warning: Citation `stable-baselines3' on page 3 undefined on input line 222.
 
 [3 <./figures/input_shaping/Command_form.pdf> <./figures/input_shaping/Jumping_command_position.pdf> <./figures/input_shaping/Jump_convolve.pdf>]
-Package hyperref Info: bookmark level for unknown todo defaults to 0 on input line 284.
+Package hyperref Info: bookmark level for unknown todo defaults to 0 on input line 285.
 
 
-LaTeX Warning: Citation `Brockman2016c' on page 4 undefined on input line 288.
+LaTeX Warning: Citation `Brockman2016c' on page 4 undefined on input line 289.
 
 [4 <./figures/Monopode_System/stutter_jump.png>]
 <figures/design_space_narr/Design_3D_Plot_0.01_.pdf, id=190, 514.08394pt x 421.87538pt>
 File: figures/design_space_narr/Design_3D_Plot_0.01_.pdf Graphic file (type pdf)
 <use figures/design_space_narr/Design_3D_Plot_0.01_.pdf>
-Package pdftex.def Info: figures/design_space_narr/Design_3D_Plot_0.01_.pdf  used on input line 339.
+Package pdftex.def Info: figures/design_space_narr/Design_3D_Plot_0.01_.pdf  used on input line 340.
 (pdftex.def)             Requested size: 216.81pt x 177.92029pt.
 <figures/design_space_wide/Design_3D_Plot_0.075_.pdf, id=191, 514.08394pt x 421.87538pt>
 File: figures/design_space_wide/Design_3D_Plot_0.075_.pdf Graphic file (type pdf)
 <use figures/design_space_wide/Design_3D_Plot_0.075_.pdf>
-Package pdftex.def Info: figures/design_space_wide/Design_3D_Plot_0.075_.pdf  used on input line 348.
+Package pdftex.def Info: figures/design_space_wide/Design_3D_Plot_0.075_.pdf  used on input line 349.
 (pdftex.def)             Requested size: 216.81pt x 177.92029pt.
 <figures/design_space_narr/HeightVsTime.png, id=200, 437.4744pt x 293.4162pt>
 File: figures/design_space_narr/HeightVsTime.png Graphic file (type png)
 <use figures/design_space_narr/HeightVsTime.png>
-Package pdftex.def Info: figures/design_space_narr/HeightVsTime.png  used on input line 364.
+Package pdftex.def Info: figures/design_space_narr/HeightVsTime.png  used on input line 365.
 (pdftex.def)             Requested size: 216.81pt x 145.41383pt.
 <figures/design_space_narr/RewVsTime.png, id=201, 437.9562pt x 293.4162pt>
 File: figures/design_space_narr/RewVsTime.png Graphic file (type png)
 <use figures/design_space_narr/RewVsTime.png>
-Package pdftex.def Info: figures/design_space_narr/RewVsTime.png  used on input line 373.
+Package pdftex.def Info: figures/design_space_narr/RewVsTime.png  used on input line 374.
 (pdftex.def)             Requested size: 216.81pt x 145.25266pt.
 <figures/design_space_narr/SpringVsTime.png, id=204, 437.9562pt x 293.4162pt>
 File: figures/design_space_narr/SpringVsTime.png Graphic file (type png)
 <use figures/design_space_narr/SpringVsTime.png>
-Package pdftex.def Info: figures/design_space_narr/SpringVsTime.png  used on input line 385.
+Package pdftex.def Info: figures/design_space_narr/SpringVsTime.png  used on input line 386.
 (pdftex.def)             Requested size: 216.81pt x 145.25266pt.
 <figures/design_space_narr/ZetaVsTime.png, id=205, 437.9562pt x 293.4162pt>
 File: figures/design_space_narr/ZetaVsTime.png Graphic file (type png)
 <use figures/design_space_narr/ZetaVsTime.png>
-Package pdftex.def Info: figures/design_space_narr/ZetaVsTime.png  used on input line 394.
+Package pdftex.def Info: figures/design_space_narr/ZetaVsTime.png  used on input line 395.
 (pdftex.def)             Requested size: 216.81pt x 145.25266pt.
  [5 <./figures/design_space_narr/Design_3D_Plot_0.01_.pdf> <./figures/design_space_wide/Design_3D_Plot_0.075_.pdf>]
 <figures/design_space_wide/HeightVsTime.png, id=255, 437.4744pt x 293.4162pt>
 File: figures/design_space_wide/HeightVsTime.png Graphic file (type png)
 <use figures/design_space_wide/HeightVsTime.png>
-Package pdftex.def Info: figures/design_space_wide/HeightVsTime.png  used on input line 408.
+Package pdftex.def Info: figures/design_space_wide/HeightVsTime.png  used on input line 409.
 (pdftex.def)             Requested size: 216.81pt x 145.41383pt.
 <figures/design_space_wide/RewVsTime.png, id=256, 437.9562pt x 293.4162pt>
 File: figures/design_space_wide/RewVsTime.png Graphic file (type png)
 <use figures/design_space_wide/RewVsTime.png>
-Package pdftex.def Info: figures/design_space_wide/RewVsTime.png  used on input line 417.
+Package pdftex.def Info: figures/design_space_wide/RewVsTime.png  used on input line 418.
 (pdftex.def)             Requested size: 216.81pt x 145.25266pt.
  [6 <./figures/design_space_narr/HeightVsTime.png> <./figures/design_space_narr/RewVsTime.png> <./figures/design_space_narr/SpringVsTime.png> <./figures/design_space_narr/ZetaVsTime.png> <./figures/design_space_wide/HeightVsTime.png>]
 <figures/design_space_wide/SpringVsTime.png, id=272, 437.9562pt x 293.4162pt>
 File: figures/design_space_wide/SpringVsTime.png Graphic file (type png)
 <use figures/design_space_wide/SpringVsTime.png>
-Package pdftex.def Info: figures/design_space_wide/SpringVsTime.png  used on input line 430.
+Package pdftex.def Info: figures/design_space_wide/SpringVsTime.png  used on input line 431.
 (pdftex.def)             Requested size: 216.81pt x 145.25266pt.
 <figures/design_space_wide/ZetaVsTime.png, id=273, 437.4744pt x 293.4162pt>
 File: figures/design_space_wide/ZetaVsTime.png Graphic file (type png)
 <use figures/design_space_wide/ZetaVsTime.png>
-Package pdftex.def Info: figures/design_space_wide/ZetaVsTime.png  used on input line 439.
+Package pdftex.def Info: figures/design_space_wide/ZetaVsTime.png  used on input line 440.
 (pdftex.def)             Requested size: 216.81pt x 145.41383pt.
 <figures/timeseries/TimeseriesHeight.png, id=274, 492.1587pt x 329.5512pt>
 File: figures/timeseries/TimeseriesHeight.png Graphic file (type png)
 <use figures/timeseries/TimeseriesHeight.png>
-Package pdftex.def Info: figures/timeseries/TimeseriesHeight.png  used on input line 450.
+Package pdftex.def Info: figures/timeseries/TimeseriesHeight.png  used on input line 451.
 (pdftex.def)             Requested size: 216.81pt x 145.17393pt.
 
 No file PaperForReview.bbl.
@@ -867,13 +867,13 @@ Package rerunfilecheck Info: File `PaperForReview.out' has not changed.
 Here is how much of TeX's memory you used:
  25020 strings out of 478276
  474890 string characters out of 5850490
- 759349 words of memory out of 5000000
+ 760349 words of memory out of 5000000
  42741 multiletter control sequences out of 15000+600000
  493593 words of font info for 80 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  99i,13n,94p,1083b,854s stack positions out of 5000i,500n,10000p,200000b,80000s
 {c:/texlive/2021/texmf-dist/fonts/enc/dvips/base/8r.enc}<c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb><c:/texlive/2021/texmf-dist/fonts/type1/urw/ncntrsbk/uncr8a.pfb><c:/texlive/2021/texmf-dist/fonts/type1/urw/times/utmb8a.pfb><c:/texlive/2021/texmf-dist/fonts/type1/urw/times/utmr8a.pfb><c:/texlive/2021/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on PaperForReview.pdf (8 pages, 2685656 bytes).
+Output written on PaperForReview.pdf (8 pages, 2685732 bytes).
 PDF statistics:
  365 PDF objects out of 1000 (max. 8388607)
  287 compressed objects within 3 object streams

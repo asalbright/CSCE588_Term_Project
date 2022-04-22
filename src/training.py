@@ -38,13 +38,13 @@ except:
 
 # Model Parameters
 REWARD_FUNCTION = 'RewardHeight'    # 'RewardHeight', 'RewardSpecifiedHeight', 'RewardEfficiency'
-MODEL_TYPE = 'TD3'
+MODEL_TYPE = 'PPO'
 LEARNING_RATE = 0.02
 GAMMA = 0.99
-ROLLOUT = 100           # For TD3
+ROLLOUT = 10           # For TD3
 TOTAL_SIMS = 1000
 
-batch_size=75 #for PPO
+batch_size=64 #for PPO
 n_steps=50 #for PPO
 
 # Design space parameters
@@ -122,7 +122,7 @@ def train_agents(seed=12345):
     # TODO: Change log the name to whatever you want
     # OPEN tensorboard with the following bash command: tensorboard --logdir ./logs/
     #model.learn(total_timesteps=TOTAL_SIMS, callback=callback, tb_log_name=f'{MODEL_TYPE}_{LEARNING_RATE}_{batch_size}_{n_steps}_{int(seed)}')
-    model.learn(total_timesteps=TOTAL_SIMS, callback=callback, tb_log_name=f'{MODEL_TYPE}_{ROLLOUT}_{int(seed)}')
+    model.learn(total_timesteps=TOTAL_SIMS, callback=callback, tb_log_name=f'{MODEL_TYPE}_{LEARNING_RATE}_{n_steps}_{int(seed)}')
 
 # Set up the training multiprocess
 def multi_process(function, i, n_processors):
