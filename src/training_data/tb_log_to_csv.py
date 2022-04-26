@@ -216,7 +216,7 @@ def tabulate_events(dpath, spath):
 
         final_out[dname] = df
 
-    return final_out
+    return dname.split('_')[0], final_out
 
 if __name__ == '__main__':
     '''
@@ -231,11 +231,11 @@ if __name__ == '__main__':
         save_path = Path(path).parents[0] / 'training_logs'
         if not os.path.exists(save_path): os.makedirs(save_path)
 
-        steps = tabulate_events(path, save_path)
+        dname, steps = tabulate_events(path, save_path)
         path = save_path / "Combined_Data"
         if not os.path.exists(path): os.makedirs(path)
 
         # Combine all the data from the save_path
         data = combineDataInFolder('csv', save_path)
         # Save the data within the combined data directory
-        data.to_csv(path / 'all_results.csv')
+        data.to_csv(path / f'all_results_{dname}.csv')
