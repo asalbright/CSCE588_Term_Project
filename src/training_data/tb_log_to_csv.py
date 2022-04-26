@@ -183,6 +183,10 @@ def combineDataInFolder(file_type, path=None, axis=1) -> pd.DataFrame:
 
 def tabulate_events(dpath, spath):
 
+    # check if the save path exists
+    if not os.path.exists(spath):
+        os.makedirs(spath)
+
     final_out = {}
     for dname in os.listdir(dpath):
         print(f"Converting run {dname}",end="")
@@ -216,7 +220,9 @@ def tabulate_events(dpath, spath):
 
         final_out[dname] = df
 
-    return dname.split('_')[0], final_out
+        dname = dname.split('_')[0] + '_' + dname.split('_')[3]
+
+    return dname, final_out
 
 if __name__ == '__main__':
     '''
@@ -226,16 +232,18 @@ if __name__ == '__main__':
     '''
 
     log_paths = getDirectoryPaths(current_path=Path.cwd(), header="Select a path to the logs folder.")
+    save_path = Path(log_paths[0]).parents[0] / 'training_logs'
+    if not os.path.exists(save_path): os.makedirs(save_path)
+
     for path in log_paths:
         print(f"Converting logs in {path}")
-        save_path = Path(path).parents[0] / 'training_logs'
-        if not os.path.exists(save_path): os.makedirs(save_path)
+        spath = save_path / path.name
 
-        dname, steps = tabulate_events(path, save_path)
+        dname, steps = tabulate_events(path, spath)
         path = save_path / "Combined_Data"
         if not os.path.exists(path): os.makedirs(path)
 
         # Combine all the data from the save_path
-        data = combineDataInFolder('csv', save_path)
+        data = combineDataInFolder('csv', spath)
         # Save the data within the combined data directory
         data.to_csv(path / f'all_results_{dname}.csv')
