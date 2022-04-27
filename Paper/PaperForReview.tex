@@ -85,7 +85,8 @@ In addition to the work done using RL to develop controllers for flexible system
 
 As such, this paper explores the use of RL for concurrent design of flexible-legged locomotive systems. A simplified flexible jumping system was used where, for the initial work, the control input was held fixed so that an RL algorithm was tasked with only learning optimized mechanical parameters. The rest of the paper is organized such that in the next section, similar work will be discussed. In Section \ref{sec:monopode_model}, the monopode environment details will be defined. Next, in Section~\ref{sec:control_input_exp}, the input used during training will be explained. Then, in Section~\ref{sec:learning_mech_params}, the algorithm used along with the method of the experiments will be presented. The performance of the learned designs are shown in Section~\ref{sec:results}.
 
-%------------------------------------------------------------------------
+%%%%%%%%% RELATED WORK
+
 \section{Related Work}
 \label{sec:related_work}
 \subsection{Flexible Locomotive Systems}
@@ -100,7 +101,8 @@ Control methods developed for flexible systems have been shown to be effective f
 
 Defining an optimal controller for a system can be difficult due to challenges such as mechanical and electrical design limits. This is especially true when the system is flexible and the model is nonlinear. A solution to this challenge is to concurrently design a system with the controllers so that the two are jointly optimized. This strategy has been used to develop better performing mechatronics systems \cite{Li2001}.  More recent work has used advanced methods such as evolutionary strategies to define robot design parameters \cite{Wang2019}. In addition to evolutionary strategies, reinforcement learning has been shown to be a viable solution for concurrent design of 2D simulated locomotive systems \cite{Ha2019j}. This is further shown to be a viable method by demonstrating more complex morphology modifications in 3D reaching and locomotive tasks \cite{Schaff2019e}. However, these techniques have not yet been applied to flexible systems for locomotive tasks. 
 
-%------------------------------------------------------------------------
+%%%%%%%%% MONOPODE MODEL
+
 \section{Monopode Model}
 \label{sec:monopode_model}
 
@@ -165,7 +167,8 @@ Additionally, the system is constrained such that it only moves vertically and t
 \end{table}
 % 
         
-%------------------------------------------------------------------------
+%%%%%%%%% COMMAND DESIGN
+
 \section{Jumping Command Design}
 \label{sec:control_input_exp}
 
@@ -214,7 +217,8 @@ For the bang-bang-based jumping command, the amplitudes of the resulting impulse
         % \vspace{-4mm}
 \end{figure}
 
-%------------------------------------------------------------------------
+%%%%%%%%% MECHANICAL DESIGN
+
 \section{Learning Mechanical Design}
 \label{sec:learning_mech_params}
 \subsection{Reinforcement Learning Algorithm}
@@ -282,8 +286,6 @@ The training hyperparameters for PPO found in Table~\ref{tab:training_hyperamete
 The learning rate and N-steps were adjusted as the algorithm was not able to converge within 1000 episodes given the initial hyperparameter values of 0.0003 and 2048. The learning rate and N-steps parameters were selected such that results converged in a similar amount of
 episodes as TD3.
 
-\todo[inline]{Make a hyperparameters table for PPO.}
-
 \subsection{Training Environment Design}
 %
 To allow the agent to find a mechanical design, a reinforcement learning environment conforming to the OpenAI Gym standard \cite{Brockman2016c} was created for the monopode model described in Section~\ref{sec:monopode_model}, including a fixed controller input based on the algorithm described in the previous section. Unlike the common use case for RL, which is tasking the agent with finding a control input to match a design, the agent in this work was tasked with finding mechanical parameters to match a control input.
@@ -307,139 +309,70 @@ where $\alpha$ and $\zeta$ are the nominal spring constant and damping ratio of 
 
 \subsection{Reward Function Design}
 
-The RL algorithm was utilized to find designs for two different reward cases. Time series data was captured during the simulation phase of training and was used to evaluate the designs performance through these rewards. The first reward case used was:
+The RL algorithm was utilized to find designs for a single reward case. Time series data was captured during the simulation phase of training and was used to evaluate the designs performance through with this reward. The reward used was:
 %
 \begin{equation}
         \mathbb{R}_1 = \left (\textbf{X}  \right )_{\text{max}}
 \end{equation}
 % 
-where $\textbf{X}$ was the timeseries rod height of the monopode captured during simulation. The goal of the first reward was to find a design that would cause the monopode to jump as high as possible.
-
-The reward for the second case was:
-%
-\begin{equation}
-        \mathbb{R}_2 = - \frac{\left (\textbf{X}  \right )_{\text{max}} - x_{s}}{x_{s}}
-\end{equation}
-%
-where $x_s$ was the desired jump height, which was set to 0.1~m. The second case was utilized to test RL's ability to find a design that minimized the error between the maximum height reached and the desired maximum height to reach. 
+where $\textbf{X}$ was the timeseries rod height of the monopode captured during simulation. The goal of the first reward was to find a design that would cause the monopode to jump as high as possible. 
 
 \subsection{Training Schedule}
 
-To evaluate the ability of an RL algorithm to robustly find design parameters meeting performance needs regardless of the neural network initializations, 10 different agents were trained with different network initialization seeds. The RL agents were trained in two different environments, one with a narrow range of allowable damping ratios and one with a wider range of possible damping ratios.
+To evaluate the ability of an RL algorithm to robustly find design parameters meeting performance needs regardless of the neural network initializations, 10 different agents were trained with different network initialization seeds.
 
 The number of episodes that were performed was 1000, with the first 100 being rollout steps. This provided the agents, in both cases previously mentioned, enough learning time to converge to designs that satisfied the performance requirements. During the training process, the height reached during the simulation phase (per environment step) and the design parameters selected by the algorithm where collected to evaluate the learning process. 
 
-%------------------------------------------------------------------------
-\section{Jumping Height Reached} 
+%%%%%%%%% ALGO PERFORMANCE
+
+\section{Algorithm Performance} 
 \label{sec:results}
 
 \subsection{Design Space Performance}
 %
 \begin{figure}[!t]
         \begin{center}
-        \includegraphics[width = 3in]{figures/design_space_narr/Design_3D_Plot_0.01_.pdf}  
-        \caption{Jumping Performance of Narrow Design Space}
-        \label{fig:spring_zeta_height_close}
-        \end{center}
-        % \vspace{-5mm}
-\end{figure}
-%
-\begin{figure}[!t]
-        \begin{center}
-        \includegraphics[width = 3in]{figures/design_space_wide/Design_3D_Plot_0.075_.pdf}  
+        \includegraphics[width = 3in]{figures/ppo_vs_td3/Design_3D_Plot_0.075_.pdf}  
         \caption{Jumping Performance of Broad Design Space}
-        \label{fig:spring_zeta_height_far}
+        \label{fig:spring_zeta_height}
         \end{center}
         % \vspace{-5mm}
 \end{figure}
 %
 
-Figures~\ref{fig:spring_zeta_height_close} and~\ref{fig:spring_zeta_height_far} represent the heights the monopode could reach for the two different design spaces. The design space provided for the first case, shown in Figure~\ref{fig:spring_zeta_height_close}, represents a space where the allowable damping ratio was limited to a fairly narrow range. This limits the solution space, making it less likely that the agent will settle to a locally optimal value. The design space provided for the second case, shown in Figure~\ref{fig:spring_zeta_height_far}, represents a space where a wider range of damping ratios are allowed. This wider range of possible values makes it more likely that the agent will settle to a local maxima.
+Figures~\ref{fig:spring_zeta_height} represents the height the monopode could reach for the design/action space. The design space provided represents a space where a wider range of damping ratios are allowed. This wider range of possible values makes it more likely that the agent will settle to a local maxima. \todo[inline]{something about how this can be used to visually instect the learned parameters.}
 
-\subsection{Design Learned Given Narrow Design Space}
+\subsection{Design Learned}
 
-Figure~\ref{fig:height_vs_step_close} shows the height achieved by the learned designs for the agents given the narrow range of possible damping ratio values. For the agents learning designs to maximize jump height, Figure~\ref{fig:height_vs_step_close} can be compared with Figure~\ref{fig:spring_zeta_height_close} showing that the agent learned a design nearing one which would achieve maximum performance. Additionally, looking at the agents learning designs to jump to the specified 0.01~m, the designs learned accomplish this with slightly more variance than that of the maximum height case. Figure~\ref{fig:rew_vs_step_close} shows the rewards the agents received during training and support that both agent types learned designs which converged. 
-%
-\begin{figure}[tb]
-        \begin{center}
-        \includegraphics[width = 3in]{figures/design_space_narr/HeightVsTime.png}  
-        \caption{Height Reached During Training}
-        \label{fig:height_vs_step_close}
-        \end{center}
-        % \vspace{-4mm}
-        \end{figure}
-%
-\begin{figure}[tb]
-        \begin{center}
-        \includegraphics[width = 3in]{figures/design_space_narr/RewVsTime.png}  
-        \caption{Reward Received During Training}
-        \label{fig:rew_vs_step_close}
-        \end{center}
-        % \vspace{-4mm}
-        \end{figure}
-%
-
-The average and standard deviation of the spring constant and damping ratio design parameters the agents selected during training are shown in Figures~\ref{fig:spring_vs_step_close} and~\ref{fig:zeta_vs_step_close}. These plots represent the learning curves for the agents learning design parameters to maximize jump height and the agents learning design parameters to jump to 0.01~m. There is a high variance in both the spring constant and the damping ratio found for the agents that learned designs to jump to a specified height. The agents which were learning designs which maximized height found designs with very little variance in terms of spring constant and significantly less variances in terms of damping ratio.
-%
-\begin{figure}[tb]
-        \begin{center}
-        \includegraphics[width = 3in]{figures/design_space_narr/SpringVsTime.png}  
-        \caption{Spring Constant Selected During Training}
-        \label{fig:spring_vs_step_close}
-        \end{center}
-        % \vspace{-4mm}
-        \end{figure}
-%
-\begin{figure}[tb]
-        \begin{center}
-        \includegraphics[width = 3in]{figures/design_space_narr/ZetaVsTime.png}  
-        \caption{Damping Ratio Selected During Training}
-        \label{fig:zeta_vs_step_close}
-        \end{center}
-        % \vspace{-4mm}
-        \end{figure}
-%
-
-\subsection{Design Learned Given Broad Design Space}
-
-Figure~\ref{fig:height_vs_step_far} shows the height achieved by the learned designs for the agents given a wider range of damping ratios. For the agents learning designs to maximize jump height, Figure~\ref{fig:height_vs_step_far} can be compared with Figure~\ref{fig:spring_zeta_height_far} showing that the agents learned a design nearing one which would achieve maximum performance. Additionally, looking at the agents learning designs to jump to the specified 0.01~m, the designs learned accomplish this, only with slightly more variance than what is seen in the maximum height agents. Figure~\ref{fig:rew_vs_step_far} shows the rewards the agents received during training and support that both agent types learned designs which converged. In this case though, the agent learning a design to jump to a specific height requires more learning steps to converge. 
+Figure~\ref{fig:rew_vs_step} shows the rewards the agents received during training and support that both algorithm types learned designs which converged. \todo[inline]{what are the differences though?}
 %
 \begin{figure}[t]
         \begin{center}
-        \includegraphics[width = 3in]{figures/design_space_wide/HeightVsTime.png}  
-        \caption{Height Reached During Training}
-        \label{fig:height_vs_step_far}
-        \end{center}
-        % \vspace{-4mm}
-        \end{figure}
-%
-\begin{figure}[t]
-        \begin{center}
-        \includegraphics[width = 3in]{figures/design_space_wide/RewVsTime.png}  
+        \includegraphics[width = 3in]{figures/ppo_vs_td3/avg_rew_comp.png}  
         \caption{Reward Received During Training}
-        \label{fig:rew_vs_step_far}
+        \label{fig:rew_vs_step}
         \end{center}
         % \vspace{-4mm}
         \end{figure}
 %
 
-The average and standard deviation of the spring constant and damping ratio design parameters the agents selected during training are shown in Figures~\ref{fig:spring_vs_step_far} and~\ref{fig:zeta_vs_step_far}. For the agents that learned designs to jump to a specified height, it can be seen that there is a high variance in spring constant throughout training. However, the majority of agents converge to a specific design, lowering the variance. The same can be seen in the damping ratio; however, the variance is mitigated significantly earlier in training. The agents which were learning designs that maximized height found them with very little variance in terms of spring constant and damping ratio. 
+The average and standard deviation of the spring constant and damping ratio design parameters the agents selected during training are shown in Figures~\ref{fig:spring_vs_step} and~\ref{fig:zeta_vs_step}. \todo[inline]{what are the differences though?}
 
 %
 \begin{figure}[tb]
         \begin{center}
-        \includegraphics[width = 3in]{figures/design_space_wide/SpringVsTime.png}  
+        \includegraphics[width = 3in]{figures/ppo_vs_td3/avg_spring_comp.png}  
         \caption{Spring Constant Selected During Training}
-        \label{fig:spring_vs_step_far}
+        \label{fig:spring_vs_step}
         \end{center}
         % \vspace{-4mm}
         \end{figure}
 %
 \begin{figure}[tb]
         \begin{center}
-        \includegraphics[width = 3in]{figures/design_space_wide/ZetaVsTime.png}  
+        \includegraphics[width = 3in]{figures/ppo_vs_td3/avg_zeta_comp.png}  
         \caption{Damping Ratio Selected During Training}
-        \label{fig:zeta_vs_step_far}
+        \label{fig:zeta_vs_step}
         \end{center}
         % \vspace{-4mm}
         \end{figure}
@@ -448,41 +381,20 @@ The average and standard deviation of the spring constant and damping ratio desi
 %
 \begin{figure}[tb]
         \begin{center}
-        \includegraphics[width = 3in]{figures/timeseries/TimeseriesHeight.png}  
-        \caption{Height vs Time of Average Optimal Designs}
+        \includegraphics[width = 3in]{figures/ppo_vs_td3/timeseries_height.png}  
+        \caption{Response of Average Optimal Designs}
         \label{fig:height_vs_time}
         \end{center}
         % \vspace{-4mm}
         \end{figure}
 
-The final mean and standard deviation of the design parameters for the two different cases are presented in Table~\ref{tab:learned_design_params}. Figure~\ref{fig:height_vs_time} shows the jumping performance of the mean designs learned for both cases tested. The agents tasked with finding designs to jump to the specified 0.01~m, did so with minimal error. The difference seen in maximum height reached between the two cases represents the difference in the damping ratio design space the agents had access to. The peak heights achieved can be compared again to Figures~\ref{fig:spring_zeta_height_close} and~\ref{fig:spring_zeta_height_far} to show that the agents learned designs nearing those achieving maximum performance.
+Figure~\ref{fig:height_vs_time} shows the jumping performance of the mean designs learned for both algorithms tested. The peak heights achieved can be compared again to Figure~\ref{fig:spring_zeta_height} to show that the agents learned designs nearing those achieving maximum performance.
 
-%
-\begin{table*}[ht]
-        \caption{Learned Design Parameters}
-        \vspace{-4mm}
-        \label{tab:learned_design_params}
-                \begin{center}
-                \begin{tabular}{|c||c||c||c||c|}
-                \hline
-                \multicolumn{2}{|c||}{Training Case}                                                                           & Design Parameter & Mean     & STD      \\
-                \hline
-                \multirow{4}{*}{\centering Narrow Design Space}           & \multirow{2}{*}{\centering Learn Max Height}       & Spring Constant  & 3.62e03  & 3.82e01  \\
-                                                                          &                                                    & Damping Ratio    & 3.37e-04 & 2.11e-03 \\
-                                                                          & \multirow{2}{*}{\centering Learn Specified Height} & Spring Constant  & 7.74e03  & 1.24e03  \\
-                                                                          &                                                    & Damping Ratio    & 4.55e-03 & 6.49e-03 \\
-                \multirow{4}{*}{\centering Broad Design Space}            & \multirow{2}{*}{\centering Learn Max Height}       & Spring Constant  & 3.55e03  & 4.86e01  \\
-                                                                          &                                                    & Damping Ratio    & 7.53e-03 & 8.86e-06 \\
-                                                                          & \multirow{2}{*}{\centering Learn Specified Height} & Spring Constant  & 7.07e03  & 2.16e02  \\
-                                                                          &                                                    & Damping Ratio    & 7.54e-03 & 3.27e-05 \\
-                \hline
-                \end{tabular}
-                \end{center}
-        \end{table*}
+%%%%%%%%% CONCLUSION
 
-%------------------------------------------------------------------------
 \section{Conclusion}
 \label{sec:conclusion}
+\todo[inline]{This needs some rewriting.}
 The monopode model was used in conjunction with a predetermined control input to determine if a reinforcement learning algorithm (TD3) could be used to find optimal performing design parameters regarding jumping performance. This work was done in part to determine if reinforcement learning could be used as the mechanical design learner for an intelligent concurrent design algorithm. It was shown that when providing an agent with a design space that was smaller in size, the agents performed well in finding design parameters which met the performance constraints. The designs found were high in design variance, however. It was additionally shown that when provided with larger design space, the agents excelled at finding design parameters which were lower in design variance but still met the design constraints.
 
 
@@ -491,5 +403,41 @@ The monopode model was used in conjunction with a predetermined control input to
 \bibliographystyle{ieee_fullname}
 \bibliography{C:/Users/andre/Documents/BibTeX/CRAWLAB}
 }
+
+%%%%%%%%% APPENDIX
+\appendix
+%%%%%%%%% Learning Rate
+\section{Learning Rate}
+\label{app:lr_changes}
+
+\begin{figure*}[tb]
+\centering
+\begin{minipage}[b]{.45\textwidth}
+        \includegraphics[width=\linewidth]{figures/comp_learning_rate/avg_rew_ppo.png}
+        \caption{PPO Reward}\label{label-a}
+\end{minipage}
+\hfill
+\begin{minipage}[b]{.45\textwidth}
+        \includegraphics[width=\linewidth]{figures/comp_learning_rate/avg_rew_td3.png}
+        \caption{PPO Reward}\label{label-b}
+\end{minipage}
+\end{figure*}
+        
+These are some changes due to learning rate.
+
+%%%%%%%%% Update Rate
+\section{Update Rate}
+\label{app:ur_changes}
+
+\begin{figure}[tb]
+\begin{center}
+        \includegraphics[width = 3in]{figures/ppo_n_steps/avg_rew_ppo.png}
+        \caption{Reward Due to Changes in N Steps}
+        \label{fig:n_steps}
+\end{center}
+% \vspace{-4mm}
+\end{figure}
+
+These are some changes due to update rate.
 
 \end{document}
