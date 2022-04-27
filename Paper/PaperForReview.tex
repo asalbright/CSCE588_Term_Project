@@ -340,11 +340,15 @@ The number of episodes that were performed was 1000, with the first 100 being ro
 \end{figure}
 %
 
-Figures~\ref{fig:spring_zeta_height} represents the height the monopode could reach for the design/action space. The design space provided represents a space where a wider range of damping ratios are allowed. This wider range of possible values makes it more likely that the agent will settle to a local maxima. \todo[inline]{something about how this can be used to visually instect the learned parameters.}
+Figures~\ref{fig:spring_zeta_height} represents the height the monopode could reach for the design/action space. The design space provided represents a space where a wider range of damping ratios are allowed. This wider range of possible values makes it more likely that the agent will settle to a local maxima. Additionally, it can be used to visually determine the gradient of the jumping height in regards to the design parameters, and shows that the optimal results should occur around a 4000 N/m spring constant and the minimum damping ratio. \todo[inline]{something about how this can be used to visually instect the learned parameters.}
 
 \subsection{Design Learned}
 
-Figure~\ref{fig:rew_vs_step} shows the rewards the agents received during training and support that both algorithm types learned designs which converged. \todo[inline]{what are the differences though?}
+Figure~\ref{fig:rew_vs_step} shows the rewards the agents received during training and support that both algorithm types learned designs which converged. 
+At 1000 episodes the mean rewards of both algorithms are similar, both within one standard deviation of either algorithm's performance. However, PPO shows to be the preferable algorithm as it has a significantly smaller standard deviation.
+This means that fewer agents would need to be trained using PPO, as training an agent using the PPO algorithm will more consistently lead to the algorithms optimal result.  \todo[inline]{what are the differences though?}
+
+\todo[inline]{what are the differences though?}
 %
 \begin{figure}[t]
         \begin{center}
@@ -356,7 +360,8 @@ Figure~\ref{fig:rew_vs_step} shows the rewards the agents received during traini
         \end{figure}
 %
 
-The average and standard deviation of the spring constant and damping ratio design parameters the agents selected during training are shown in Figures~\ref{fig:spring_vs_step} and~\ref{fig:zeta_vs_step}. \todo[inline]{what are the differences though?}
+The average and standard deviation of the spring constant and damping ratio design parameters the agents selected during training are shown in Figures~\ref{fig:spring_vs_step} and~\ref{fig:zeta_vs_step}. 
+These figures show that the PPO and TD3 Algorithm on average converge to a similar result. However, the variation in the standard deviation of the parameter choices between the PPO agents, show that each agent's parameter choice varied greatly between episodes. This implies a higher preference for exploration in the PPO agents than the TD3. The larger standard deviation of the TD3 algorithms does not demonstrate the algorithm's preference for exploration, instead it shows that agents trained with TD3 algorithm converged on solutions with more significant differences.
 
 %
 \begin{figure}[tb]
@@ -407,6 +412,7 @@ The monopode model was used in conjunction with a predetermined control input to
 %%%%%%%%% APPENDIX
 \appendix
 %%%%%%%%% Learning Rate
+
 \section{Learning Rate}
 \label{app:lr_changes}
 
@@ -419,11 +425,14 @@ The monopode model was used in conjunction with a predetermined control input to
 \hfill
 \begin{minipage}[b]{.45\textwidth}
         \includegraphics[width=\linewidth]{figures/comp_learning_rate/avg_rew_td3.png}
-        \caption{PPO Reward}\label{label-b}
+        \caption{TD3 Reward}\label{label-b}
 \end{minipage}
 \end{figure*}
         
-These are some changes due to learning rate.
+In the process of this project the effects of learning rate on the PPO and TD3 Algorithms were explored.
+Figures~\ref{label-a} and \ref{label-b} show that the Time Steps needed for the PPO algorithm to converge is very sensitive to the choice in learning rate, it also shows
+that the overall mean and standard deviation of the rewards is sensitive. On the other hand, Td3 does not appear to be at all sensitive to changes in the learning rate, at least not in the range
+of learning rates explored in this study.
 
 %%%%%%%%% Update Rate
 \section{Update Rate}
@@ -438,6 +447,7 @@ These are some changes due to learning rate.
 % \vspace{-4mm}
 \end{figure}
 
-These are some changes due to update rate.
+In addition to learning rate the effects of the update rate on PPO was explored. This study found an update rate of one update per 50 time steps to be optimum. The results shown in Figure~\ref{fig:n_steps} show that an update rate of 100 is to slow as the algorithm is unable to converge by the 1000th Time Step. The figure also shows that updating every 10 steps is also a poor choice. This is because the
+algorithm is forced to make updates on small batch sizes.
 
 \end{document}
