@@ -237,7 +237,7 @@ The training hyperparameters were selected based on the algorithm author recomme
         Hyperparameter                     & Value                           \\
         \hline
         Learning Rate, $\alpha$         & 0.001                           \\
-        Learning Starts                 & 100 Steps                       \\
+        Learning Starts                 & 10 Steps                        \\
         Batch Size                      & 100 Transitions                 \\
         Tau, $\tau$                     & 0.005                           \\
         Gamma, $\gamma$                 & 0.99                            \\
@@ -247,7 +247,7 @@ The training hyperparameters were selected based on the algorithm author recomme
         Policy Delay                    & 1 : 2 Q-Function Updates        \\
         Target Policy Noise, $\epsilon$ & 0.2                             \\
         Target Policy Clip, $c$         & 0.5                             \\
-        Seed                            & 100 Random Seeds                \\
+        Seed                            & 10 Random Seeds                 \\
         \hline
         \end{tabular}
         \end{center}
@@ -274,7 +274,7 @@ The training hyperparameters were selected based on the algorithm author recomme
         Policy Delay                    & 1 : 2 Q-Function Updates        \\
         Target Policy Noise, $\epsilon$ & 0.2                             \\
         Target Policy Clip, $c$         & 0.5                             \\
-        Seed                            & 100 Random Seeds                \\
+        Seed                            & 10 Random Seeds                 \\
         \hline
         \end{tabular}
         \end{center}
@@ -323,13 +323,13 @@ The reward for the second case was:
         \mathbb{R}_2 = - \frac{\left (\textbf{X}  \right )_{\text{max}} - x_{s}}{x_{s}}
 \end{equation}
 %
-where $x_s$ was the desired jump height, which was set to 0.1~m. The second case was utilized to test RL's ability to find a design that minimized the error between the maximum height reached and the desired maximum height to reach. 
+where $x_s$ was the desired jump height, which was set to 0.08~m. The second case was utilized to test RL's ability to find a design that minimized the error between the maximum height reached and the desired maximum height to reach. 
 
 \subsection{Training Schedule}
 
 To evaluate the ability of an RL algorithm to robustly find design parameters meeting performance needs regardless of the neural network initializations, 10 different agents were trained with different network initialization seeds.
 
-The number of episodes that were performed was 1000, with the first 100 being rollout steps. This provided the agents, in both cases previously mentioned, enough learning time to converge to designs that satisfied the performance requirements. During the training process, the height reached during the simulation phase (per environment step) and the design parameters selected by the algorithm where collected to evaluate the learning process. 
+The number of episodes that were performed was 1000. In the case of the TD3 algorithm testing, the first 10 steps were rollout steps. This provided the agents enough learning time to converge to designs that satisfied the performance requirements. During the training process, the height reached during the simulation phase (per environment step) and the design parameters selected by the algorithm where collected to evaluate the learning process.
 
 %%%%%%%%% ALGO PERFORMANCE
 
@@ -353,62 +353,64 @@ Figures~\ref{fig:spring_zeta_height} represents the height the monopode could re
 \subsection{Design Learned}
 
 Figure~\ref{fig:rew_vs_step} shows the rewards the agents received during training. 
-At 1000 episodes the mean rewards of both algorithms when learning designs for maximum height are similar. Both have rewards within one standard deviation of either algorithm's performance. However, PPO shows to be the preferable algorithm in this case, as it has a significantly smaller standard deviation.
-This means that fewer agents would need to be trained using PPO, as training an agent using the PPO algorithm will more consistently lead to the algorithms optimal result.
-PPO is also the preferable algorithm when training the agents to jump to a specified height. Figure~\ref{fig:rew_vs_step} shows that the agents trained with the PPO algorithm were able to obtain a higher maximum reward than the algorithms trained with TD3.
+At 1000 episodes the mean rewards of both algorithms when learning designs for maximum height are similar. Both have rewards within one standard deviation of the other algorithm's performance. However, PPO shows to be the preferable algorithm in this case, as it has a significantly smaller standard deviation.
+
+This means that fewer agents would need to be trained using PPO, as training an agent using the PPO algorithm will more consistently lead to the algorithms optimal result. PPO is also the preferred algorithm when learning designs that would jump the monopode to a specified height. Figure~\ref{fig:rew_vs_step} shows that the agents trained with the PPO algorithm were able to obtain a higher maximum reward than the algorithms trained with TD3.
 
 \begin{figure}[t]
-        \begin{center}
-        \includegraphics[width = 3in]{figures/ppo_vs_td3/avg_rew_comp.png}  
+\begin{center}
+        \includegraphics[width = 3in]{figures/ppo_vs_td3/avg_rew_comp.png}
         \caption{Reward Received During Training}
         \label{fig:rew_vs_step}
-        \end{center}
-        % \vspace{-4mm}
-        \end{figure}
+\end{center}
+% \vspace{-4mm}
+\end{figure}
 %
 
-The average and standard deviation of the spring constant and damping ratio design parameters the agents selected during training are shown in Figures~\ref{fig:spring_vs_step} and~\ref{fig:zeta_vs_step}. 
-These figures show that the PPO and TD3 Algorithm on average converge to a similar result when training for Maximum height. However, the variation in the standard deviation of the parameter choices between the PPO agents, show that each agent's parameter choice varied greatly between episodes. This implies a higher preference for exploration in the PPO agents than the TD3. The larger standard deviation of the TD3 algorithms does not demonstrate the algorithm's preference for exploration, instead it shows that agents trained with TD3 algorithm converged on solutions with more significant differences.
-When the agents were trained to jump to a specific height, the two algorithm's agents converged on different solutions. Additionally, the standard deviation of the spring constant learned by both algorithms agents, and the damping ratio learned by the PPO algorithm agents, are significantly larger than when the agents were trained for maximum height. This is due to there being a wider range of possible solutions to achieve the specified height of 0.08m.
+The average and standard deviation of the spring constant and damping ratio design parameters the agents selected during training are shown in Figures~\ref{fig:spring_vs_step} and~\ref{fig:zeta_vs_step}. These figures show that the PPO and TD3 Algorithm on average converge to a similar result when learning a design to maximize jump height. However, the variation in the standard deviation of the parameter choices between the PPO agents, show that each agent's parameter choice varied greatly between episodes. This implies a higher preference for exploration in the PPO agents compared to the TD3 agents. The larger standard deviation of the TD3 algorithms does not demonstrate the algorithm's preference for exploration, instead it shows that agents trained with TD3 algorithm converged on solutions with more significant differences.
+
+When the agents learned designs to jump the monopode to a specific height, the two algorithm's agents converged on different solutions. Additionally, the standard deviation of the spring constant learned by both algorithm's agents, and the damping ratio learned by the PPO algorithm agents, are significantly larger than when the agents were trained for maximum height. This is due to there being a wider range of possible solutions to achieve the specified height of 0.08m.
 %
 \begin{figure}[tb]
-        \begin{center}
-        \includegraphics[width = 3in]{figures/ppo_vs_td3/avg_spring_comp.png}  
+\begin{center}
+        \includegraphics[width = 3in]{figures/ppo_vs_td3/avg_spring_comp.png}
         \caption{Spring Constant Selected During Training}
         \label{fig:spring_vs_step}
-        \end{center}
-        % \vspace{-4mm}
-        \end{figure}
+\end{center}
+% \vspace{-4mm}
+\end{figure}
 %
 \begin{figure}[tb]
         \begin{center}
-        \includegraphics[width = 3in]{figures/ppo_vs_td3/avg_zeta_comp.png}  
-        \caption{Damping Ratio Selected During Training}
-        \label{fig:zeta_vs_step}
+                \includegraphics[width = 3in]{figures/ppo_vs_td3/avg_zeta_comp.png}
+                \caption{Damping Ratio Selected During Training}
+                \label{fig:zeta_vs_step}
         \end{center}
         % \vspace{-4mm}
-        \end{figure}
+\end{figure}
+
 
 \subsection{Average Design Performance}
 %
 \begin{figure}[tb]
         \begin{center}
-        \includegraphics[width = 3in]{figures/ppo_vs_td3/avg_height_comp.png}  
-        \caption{Response of Average Optimal Designs}
-        \label{fig:height_vs_time}
+                \includegraphics[width = 3in]{figures/ppo_vs_td3/avg_height_comp.png}
+                \caption{Response of Average Optimal Designs}
+                \label{fig:height_vs_time}
         \end{center}
         % \vspace{-4mm}
-        \end{figure}
+\end{figure}
 
-Figure~\ref{fig:height_vs_time} shows the jumping performance of the mean designs learned for both algorithms tested. The peak heights achieved can be compared again to Figure~\ref{fig:spring_zeta_height} to show that the agents learned designs nearing those achieving maximum performance. The figure also shows that the agents trained using the PPO algorithm was able to better
-match the specified jump height of 0.08m, where the TD3 agents overshot the specified height.
+Figure~\ref{fig:height_vs_time} shows the jumping performance of the mean designs during training for both algorithms tested. The peak heights achieved can be compared again to Figure~\ref{fig:spring_zeta_height} to show that the agents learned designs nearing those achieving maximum performance. The figure also shows that the agents trained using the PPO algorithm was better able to find designs that jumped the monopode to the specified jump height of 0.08m, where the TD3 agents learned designs that overshot the specified height.
 
 %%%%%%%%% CONCLUSION
 
 \section{Conclusion}
 \label{sec:conclusion}
-The monopode model was used in conjunction with a predetermined control input to compare the performance of the TD3 and PPO reinforcement learning algorithms at finding optimal performing design parameters regarding jumping performance. This work was done in part to determine if reinforcement learning could be used as the mechanical design learner for an intelligent concurrent design algorithm. It was shown that when training for maximum jump height the algorithms train agents with similar maximum heights, however the standard deviation of the PPO agents designs is smaller. 
-Additionally, when training for a specified height the PPO algorithm outperformed the TD3 algorithm, having a higher average reward.
+The monopode model was used in conjunction with a predefined control input to compare the performance of the TD3 and PPO reinforcement learning algorithms regarding finding optimal performing design parameters. This work was done in part to determine if reinforcement learning could be used as the mechanical design learner for an intelligent concurrent design algorithm. It was shown that when training for maximum jump height the algorithms train agents with similar maximum heights, however the standard deviation of the PPO agents designs is smaller. Additionally, when training for a specified height, the PPO algorithm was shown outperforming the TD3 algorithm, receiving a higher average reward.
+
+\section{Future Work}
+\todo[inline]{Maybe there should be a small paragraph on future work here.}
 
 
 %%%%%%%%% REFERENCES
@@ -442,7 +444,7 @@ Additionally, when training for a specified height the PPO algorithm outperforme
 \end{figure}
         
 In the process of this project the effects of learning rate on the PPO and TD3 Algorithms were explored.
-Figures~\ref{fig:ppo_rew} and \ref{fig:td3_rew} show that the Time Steps needed for the PPO algorithm to converge is very sensitive to the choice in learning rate, it also shows that the overall mean and standard deviation of the rewards is sensitive. On the other hand, Td3 does not appear to be at all sensitive to changes in the learning rate, at least not in the range of learning rates explored in this study.
+Figures~\ref{fig:ppo_rew} and \ref{fig:td3_rew} show that the Time Steps needed for the PPO algorithm to converge is very sensitive to the choice in learning rate, it also shows that the overall mean and standard deviation of the rewards is sensitive. On the other hand, TD3 does not appear to be as sensitive to changes to the learning rate, at least not in the range of learning rates explored in this study.
 
 %%%%%%%%% Update Rate
 \section{Update Rate}
@@ -457,7 +459,6 @@ Figures~\ref{fig:ppo_rew} and \ref{fig:td3_rew} show that the Time Steps needed 
 % \vspace{-4mm}
 \end{figure}
 
-In addition to learning rate the effects of the update rate on PPO was explored. This study found an update rate of one update per 50 time steps to be optimum. The results shown in Figure~\ref{fig:n_steps} show that an update rate of 100 is to slow as the algorithm is unable to converge by the 1000th Time Step. The figure also shows that updating every 10 steps is also a poor choice. This is because the
-algorithm is forced to make updates on small batch sizes.
+In addition to learning rate the effects of the update rate on PPO was explored. This study found an update rate of one update per 50 time steps to be optimum. The results shown in Figure~\ref{fig:n_steps} show that an update rate of 100 is to slow as the algorithm is unable to converge by the 1000th Time Step. The figure also shows that updating every 10 steps is also a poor choice. This is because the algorithm is forced to make updates on small batch sizes.
 
 \end{document}
