@@ -352,12 +352,11 @@ Figures~\ref{fig:spring_zeta_height} represents the height the monopode could re
 
 \subsection{Design Learned}
 
-Figure~\ref{fig:rew_vs_step} shows the rewards the agents received during training and support that both algorithm types learned designs which converged. 
-At 1000 episodes the mean rewards of both algorithms are similar, both within one standard deviation of either algorithm's performance. However, PPO shows to be the preferable algorithm as it has a significantly smaller standard deviation.
-This means that fewer agents would need to be trained using PPO, as training an agent using the PPO algorithm will more consistently lead to the algorithms optimal result.  \todo[inline]{what are the differences though?}
+Figure~\ref{fig:rew_vs_step} shows the rewards the agents received during training. 
+At 1000 episodes the mean rewards of both algorithms when learning designs for maximum height are similar. Both have rewards within one standard deviation of either algorithm's performance. However, PPO shows to be the preferable algorithm in this case, as it has a significantly smaller standard deviation.
+This means that fewer agents would need to be trained using PPO, as training an agent using the PPO algorithm will more consistently lead to the algorithms optimal result.
+PPO is also the preferable algorithm when training the agents to jump to a specified height. Figure~\ref{fig:rew_vs_step} shows that the agents trained with the PPO algorithm were able to obtain a higher maximum reward than the algorithms trained with TD3.
 
-\todo[inline]{what are the differences though?}
-%
 \begin{figure}[t]
         \begin{center}
         \includegraphics[width = 3in]{figures/ppo_vs_td3/avg_rew_comp.png}  
@@ -369,8 +368,8 @@ This means that fewer agents would need to be trained using PPO, as training an 
 %
 
 The average and standard deviation of the spring constant and damping ratio design parameters the agents selected during training are shown in Figures~\ref{fig:spring_vs_step} and~\ref{fig:zeta_vs_step}. 
-These figures show that the PPO and TD3 Algorithm on average converge to a similar result. However, the variation in the standard deviation of the parameter choices between the PPO agents, show that each agent's parameter choice varied greatly between episodes. This implies a higher preference for exploration in the PPO agents than the TD3. The larger standard deviation of the TD3 algorithms does not demonstrate the algorithm's preference for exploration, instead it shows that agents trained with TD3 algorithm converged on solutions with more significant differences.
-
+These figures show that the PPO and TD3 Algorithm on average converge to a similar result when training for Maximum height. However, the variation in the standard deviation of the parameter choices between the PPO agents, show that each agent's parameter choice varied greatly between episodes. This implies a higher preference for exploration in the PPO agents than the TD3. The larger standard deviation of the TD3 algorithms does not demonstrate the algorithm's preference for exploration, instead it shows that agents trained with TD3 algorithm converged on solutions with more significant differences.
+When the agents were trained to jump to a specific height, the two algorithm's agents converged on different solutions. Additionally, the standard deviation of the spring constant learned by both algorithms agents, and the damping ratio learned by the PPO algorithm agents, are significantly larger than when the agents were trained for maximum height. This is due to there being a wider range of possible solutions to achieve the specified height of 0.08m.
 %
 \begin{figure}[tb]
         \begin{center}
@@ -394,21 +393,22 @@ These figures show that the PPO and TD3 Algorithm on average converge to a simil
 %
 \begin{figure}[tb]
         \begin{center}
-        \includegraphics[width = 3in]{figures/ppo_vs_td3/timeseries_height.png}  
+        \includegraphics[width = 3in]{figures/ppo_vs_td3/avg_height_comp.png}  
         \caption{Response of Average Optimal Designs}
         \label{fig:height_vs_time}
         \end{center}
         % \vspace{-4mm}
         \end{figure}
 
-Figure~\ref{fig:height_vs_time} shows the jumping performance of the mean designs learned for both algorithms tested. The peak heights achieved can be compared again to Figure~\ref{fig:spring_zeta_height} to show that the agents learned designs nearing those achieving maximum performance.
+Figure~\ref{fig:height_vs_time} shows the jumping performance of the mean designs learned for both algorithms tested. The peak heights achieved can be compared again to Figure~\ref{fig:spring_zeta_height} to show that the agents learned designs nearing those achieving maximum performance. The figure also shows that the agents trained using the PPO algorithm was able to better
+match the specified jump height of 0.08m, where the TD3 agents overshot the specified height.
 
 %%%%%%%%% CONCLUSION
 
 \section{Conclusion}
 \label{sec:conclusion}
-\todo[inline]{This needs some rewriting.}
-The monopode model was used in conjunction with a predetermined control input to determine if a reinforcement learning algorithm (TD3) could be used to find optimal performing design parameters regarding jumping performance. This work was done in part to determine if reinforcement learning could be used as the mechanical design learner for an intelligent concurrent design algorithm. It was shown that when providing an agent with a design space that was smaller in size, the agents performed well in finding design parameters which met the performance constraints. The designs found were high in design variance, however. It was additionally shown that when provided with larger design space, the agents excelled at finding design parameters which were lower in design variance but still met the design constraints.
+The monopode model was used in conjunction with a predetermined control input to compare the performance of the TD3 and PPO reinforcement learning algorithms at finding optimal performing design parameters regarding jumping performance. This work was done in part to determine if reinforcement learning could be used as the mechanical design learner for an intelligent concurrent design algorithm. It was shown that when training for maximum jump height the algorithms train agents with similar maximum heights, however the standard deviation of the PPO agents designs is smaller. 
+Additionally, when training for a specified height the PPO algorithm outperformed the TD3 algorithm, having a higher average reward.
 
 
 %%%%%%%%% REFERENCES
@@ -423,10 +423,10 @@ The monopode model was used in conjunction with a predetermined control input to
 
 \section{Learning Rate}
 \label{app:lr_changes}
-\begin{figure}[tb]
+\begin{figure}[b]
 \begin{center}
         \includegraphics[width=3in]{figures/comp_learning_rate/avg_rew_ppo.png}
-        \caption{Reward Due to Changes in N Steps}
+        \caption{Reward Due to Changes in PPO Learning Rate}
         \label{fig:ppo_rew}
 \end{center}
 % \vspace{-4mm}
@@ -435,7 +435,7 @@ The monopode model was used in conjunction with a predetermined control input to
 \begin{figure}[tb]
 \begin{center}
         \includegraphics[width=3in]{figures/comp_learning_rate/avg_rew_td3.png}
-        \caption{Reward Due to Changes in N Steps}
+        \caption{Reward Due to Changes in TD3 Learning Rate}
         \label{fig:td3_rew}
 \end{center}
 % \vspace{-4mm}
@@ -448,7 +448,7 @@ Figures~\ref{fig:ppo_rew} and \ref{fig:td3_rew} show that the Time Steps needed 
 \section{Update Rate}
 \label{app:ur_changes}
 
-\begin{figure}[tb]
+\begin{figure}[b]
 \begin{center}
         \includegraphics[width = 3in]{figures/ppo_n_steps/avg_rew_ppo.png}
         \caption{Reward Due to Changes in N Steps}
