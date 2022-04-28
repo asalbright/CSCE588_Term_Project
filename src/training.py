@@ -37,8 +37,8 @@ except:
     print('No GPU detected')
 
 # Model Parameters
-REWARD_FUNCTION = 'RewardHeight'    # 'RewardHeight', 'RewardSpecifiedHeight', 'RewardEfficiency'
-MODEL_TYPE = 'PPO'
+REWARD_FUNCTION = 'RewardSpecifiedHeight'    # 'RewardHeight', 'RewardSpecifiedHeight', 'RewardEfficiency'
+MODEL_TYPE = 'TD3'
 LEARNING_RATE = 0.02
 GAMMA = 0.99
 ROLLOUT = 10           # For TD3
@@ -84,7 +84,8 @@ def train_agents(seed=12345):
                            max_spring_k=MAX_SPRING_K,
                            min_zeta=MIN_ZETA,
                            max_zeta=MAX_ZETA,
-                           model_type=MODEL_TYPE)    
+                           model_type=MODEL_TYPE,
+                           specified_height=0.08)    
 
     # set the trial seed for use during training
     trial_seed = int(seed)
