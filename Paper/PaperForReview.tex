@@ -354,7 +354,6 @@ Figures~\ref{fig:spring_zeta_height} represents the height the monopode could re
 
 Figure~\ref{fig:rew_vs_step} shows the rewards the agents received during training. 
 At 1000 episodes the mean rewards of both algorithms when learning designs for maximum height are similar. Both have rewards within one standard deviation of the other algorithm's performance. However, PPO shows to be the preferable algorithm in this case, as it has a significantly smaller standard deviation.
-
 This means that fewer agents would need to be trained using PPO, as training an agent using the PPO algorithm will more consistently lead to the algorithms optimal result. PPO is also the preferred algorithm when learning designs that would jump the monopode to a specified height. Figure~\ref{fig:rew_vs_step} shows that the agents trained with the PPO algorithm were able to obtain a higher maximum reward than the algorithms trained with TD3.
 
 \begin{figure}[t]
@@ -410,6 +409,8 @@ Figure~\ref{fig:height_vs_time} shows the jumping performance of the mean design
 The monopode model was used in conjunction with a predefined control input to compare the performance of the TD3 and PPO reinforcement learning algorithms regarding finding optimal performing design parameters. This work was done in part to determine if reinforcement learning could be used as the mechanical design learner for an intelligent concurrent design algorithm. It was shown that when training for maximum jump height the algorithms train agents with similar maximum heights, however the standard deviation of the PPO agents designs is smaller. Additionally, when training for a specified height, the PPO algorithm was shown outperforming the TD3 algorithm, receiving a higher average reward.
 
 \section{Future Work}
+Future work would include comparing the algorithm's performance with increasingly complex systems as well as comparing their performances as part of a concurrent design task. Additionally, ..... are other areas 
+to explore.
 \todo[inline]{Maybe there should be a small paragraph on future work here.}
 
 
