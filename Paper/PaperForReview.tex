@@ -65,8 +65,6 @@ University of Louisiana at Lafayette\\
 }
 \maketitle
 
-\listoftodos
-
 %%%%%%%%% ABSTRACT
 \begin{abstract}
   Legged systems have many advantages when compared to their wheeled counterparts. For example, they can more easily navigate extreme, uneven terrain. However, there are disadvantages as well, particularly the difficulty seen in modeling the nonlinearities of the system. Research has shown that using flexible components within legged locomotive systems improves performance measures such as efficiency and running velocity. Tuning mechanical designs to define what might be an optimal performing system is challenging though, particularly when the system is nonlinear. Reinforcement learning can be tasked with learning mechanical parameters of a system to match a control input. It is shown in this work that when deploying reinforcement learning to find design parameters for a monopode jumping system, the designs the algorithms learn are optimal within the design space provided to the agents.
@@ -83,7 +81,9 @@ Control methods have been developed that work well for flexible systems like the
 
 In addition to the work done using RL to develop controllers for flexible systems, work has been completed which shows that this technique can be used to concurrently design the mechanical aspects of a system and a controller to match said system \cite{Ha2019j}. These techniques have even been used to define mechanical parameters and control strategies where the resulting controller and hardware were deployed in a sim-to-real process, validating the usability of the technique \cite{Chen2020}. Using this technique for legged-locomotion has also been studied, but thus far has been limited to the case of rigid systems \cite{Schaff2019e}. 
 
-As such, this paper explores the use of RL for concurrent design of flexible-legged locomotive systems. A simplified flexible jumping system was used where, for the initial work, the control input was held fixed so that an RL algorithm was tasked with only learning optimized mechanical parameters. The rest of the paper is organized such that in the next section, similar work will be discussed. In Section \ref{sec:monopode_model}, the monopode environment details will be defined. Next, in Section~\ref{sec:control_input_exp}, the input used during training will be explained. Then, in Section~\ref{sec:learning_mech_params}, the algorithm used along with the method of the experiments will be presented. The performance of the learned designs are shown in Section~\ref{sec:results}.
+As such, this paper explores the use of RL for concurrent design of flexible-legged locomotive systems. For this initial work, RL was evaluated for defining mechanical design parameters given a static control input. In other words, RL was evaluated as the mechanical designer in a concurrent design architecture. Two algorithms were evaluated against each other to evaluate the performance differences between actor-critic and policy gradient based algorithms. In this work, the algorithms used were Twin Delayed Deep Deterministic Policy Gradient (TD3) and Proximal Policy Optimization (PPO). 
+
+A simplified flexible jumping system was used where, for this initial work, the control input was held fixed so that an RL algorithm was tasked with only learning optimized mechanical parameters. The rest of the paper is organized such that in the next section, similar work will be discussed. In Section \ref{sec:monopode_model}, the monopode environment details will be defined. Next, in Section~\ref{sec:control_input_exp}, the input used during training will be explained. Then, in Section~\ref{sec:learning_mech_params}, the algorithms used along with the method of the experiments will be presented. The performance of the learned designs are shown in Section~\ref{sec:results} and conclusive remarks will be made in Section~\ref*{sec:conclusion}.
 
 %%%%%%%%% RELATED WORK
 
@@ -236,7 +236,7 @@ The training hyperparameters were selected based on the algorithm author recomme
         \hline
         Hyperparameter                     & Value                           \\
         \hline
-        Learning Rate, $\alpha$         & 0.001                           \\
+        Learning Rate, $\alpha$         & 0.001                            \\
         Learning Starts                 & 10 Steps                        \\
         Batch Size                      & 100 Transitions                 \\
         Tau, $\tau$                     & 0.005                           \\
@@ -264,16 +264,13 @@ The training hyperparameters were selected based on the algorithm author recomme
         \hline
         Hyperparameter                  & Value                           \\
         \hline
-        Learning Rate, $\alpha$         & 0.001                           \\
+        Learning Rate, $\alpha$         & 0.02                            \\
+        N Steps                         & 50                              \\
         Batch Size                      & 64                              \\
-        Clip Range, $\epsilon $         & 0.2                             \\
+        N Epochs                        & 10                              \\
         Gamma, $\gamma$                 & 0.99                            \\
         GAE-Lambda,                     & 0.95                            \\
-        Training Frequency              & 1:Episode                       \\
-        Gradient Steps                  & $\propto$ Training Frequency    \\
-        Policy Delay                    & 1 : 2 Q-Function Updates        \\
-        Target Policy Noise, $\epsilon$ & 0.2                             \\
-        Target Policy Clip, $c$         & 0.5                             \\
+        Clip Range, $\epsilon $         & 0.2                             \\
         Seed                            & 10 Random Seeds                 \\
         \hline
         \end{tabular}
@@ -282,7 +279,7 @@ The training hyperparameters were selected based on the algorithm author recomme
 \end{table}
 %
 
-The training hyperparameters for PPO found in Table~\ref{tab:training_hyperameters_PPO} were set similarly to TD3's. All the PPO hyperameters, other than learning rate and N-steps, were set according to the algorithm's author and StableBaselines3's recommendations.
+The training hyperparameters for PPO found in Table~\ref{tab:training_hyperameters_PPO} were set similarly to those of TD3. All the PPO hyperameters, other than learning rate and N-steps, were set according to the author of the algorithms and recommendations the recommendations of \textbf{StableBaselines3}.
 The learning rate and N-steps were adjusted as the algorithm was not able to converge within 1000 episodes given the initial hyperparameter values of 0.0003 and 2048. The learning rate and N-steps parameters were selected such that results converged in a similar amount of
 episodes as TD3.
 
@@ -323,7 +320,7 @@ The reward for the second case was:
         \mathbb{R}_2 = - \frac{\left (\textbf{X}  \right )_{\text{max}} - x_{s}}{x_{s}}
 \end{equation}
 %
-where $x_s$ was the desired jump height, which was set to 0.08~m. The second case was utilized to test RL's ability to find a design that minimized the error between the maximum height reached and the desired maximum height to reach. 
+where $x_s$ was the desired jump height, which was set to 0.08~m. The second case was utilized to test the ability of RL to find a design that minimized the error between the maximum height reached and the desired maximum height to reach. 
 
 \subsection{Training Schedule}
 
@@ -353,7 +350,7 @@ Figures~\ref{fig:spring_zeta_height} represents the height the monopode could re
 \subsection{Design Learned}
 
 Figure~\ref{fig:rew_vs_step} shows the rewards the agents received during training. 
-At 1000 episodes the mean rewards of both algorithms when learning designs for maximum height are similar. Both have rewards within one standard deviation of the other algorithm's performance. However, PPO shows to be the preferable algorithm in this case, as it has a significantly smaller standard deviation.
+At 1000 episodes the mean rewards of both algorithms when learning designs for maximum height are similar. Both have rewards within one standard deviation of the performance of the other algorithms. However, PPO shows to be the preferable algorithm in this case, as it has a significantly smaller standard deviation.
 This means that fewer agents would need to be trained using PPO, as training an agent using the PPO algorithm will more consistently lead to the algorithms optimal result. PPO is also the preferred algorithm when learning designs that would jump the monopode to a specified height. Figure~\ref{fig:rew_vs_step} shows that the agents trained with the PPO algorithm were able to obtain a higher maximum reward than the algorithms trained with TD3.
 
 \begin{figure}[t]
@@ -366,9 +363,9 @@ This means that fewer agents would need to be trained using PPO, as training an 
 \end{figure}
 %
 
-The average and standard deviation of the spring constant and damping ratio design parameters the agents selected during training are shown in Figures~\ref{fig:spring_vs_step} and~\ref{fig:zeta_vs_step}. These figures show that the PPO and TD3 Algorithm on average converge to a similar result when learning a design to maximize jump height. However, the variation in the standard deviation of the parameter choices between the PPO agents, show that each agent's parameter choice varied greatly between episodes. This implies a higher preference for exploration in the PPO agents compared to the TD3 agents. The larger standard deviation of the TD3 algorithms does not demonstrate the algorithm's preference for exploration, instead it shows that agents trained with TD3 algorithm converged on solutions with more significant differences.
+The average and standard deviation of the spring constant and damping ratio design parameters the agents selected during training are shown in Figures~\ref{fig:spring_vs_step} and~\ref{fig:zeta_vs_step}. These figures show that the PPO and TD3 Algorithm on average converge to a similar result when learning a design to maximize jump height. However, the variation in the standard deviation of the parameter choices between the PPO agents, show that each agent's parameter choice varied greatly between episodes. This implies a higher preference for exploration in the PPO agents compared to the TD3 agents. The larger standard deviation of the TD3 algorithm does not demonstrate a preference for exploration, instead it shows that agents trained with TD3 algorithm converged on solutions with more significant differences.
 
-When the agents learned designs to jump the monopode to a specific height, the two algorithm's agents converged on different solutions. Additionally, the standard deviation of the spring constant learned by both algorithm's agents, and the damping ratio learned by the PPO algorithm agents, are significantly larger than when the agents were trained for maximum height. This is due to there being a wider range of possible solutions to achieve the specified height of 0.08m.
+When the agents learned designs to jump the monopode to a specific height, the two agents for both algorithms converged on different solutions. Additionally, the standard deviation of the spring constant learned by both agents for both algorithms, and the damping ratio learned by the PPO algorithm agents, are significantly larger than when the agents were trained for maximum height. This is due to there being a wider range of possible solutions to achieve the specified height of 0.08m.
 %
 \begin{figure}[tb]
 \begin{center}
@@ -409,9 +406,7 @@ Figure~\ref{fig:height_vs_time} shows the jumping performance of the mean design
 The monopode model was used in conjunction with a predefined control input to compare the performance of the TD3 and PPO reinforcement learning algorithms regarding finding optimal performing design parameters. This work was done in part to determine if reinforcement learning could be used as the mechanical design learner for an intelligent concurrent design algorithm. It was shown that when training for maximum jump height the algorithms train agents with similar maximum heights, however the standard deviation of the PPO agents designs is smaller. Additionally, when training for a specified height, the PPO algorithm was shown outperforming the TD3 algorithm, receiving a higher average reward.
 
 \section{Future Work}
-Future work would include comparing the algorithm's performance with increasingly complex systems as well as comparing their performances as part of a concurrent design task. Additionally, ..... are other areas 
-to explore.
-\todo[inline]{Maybe there should be a small paragraph on future work here.}
+Future work should include comparing the performance of the algorithms with increasingly complex systems. This work focused on optimizing a limited set of parameters for the monopode jumping system, which is a simplified flexible jumping system, however the utilization of RL for mechanical design could be expanded into many different types of systems. Additionally, as was mentioned in Section~\ref*{sec:intro}, the utilization of RL as a mechanical design optimizer should be evaluated in a concurrent design architecture. As was previously mentioned, finding optimal control strategies is often a challenge given a system design, therefore developing an architecture that could concurrently optimize both aspects of a robotics system, is of interest. 
 
 
 %%%%%%%%% REFERENCES
@@ -435,17 +430,20 @@ to explore.
 % \vspace{-4mm}
 \end{figure}
 
-\begin{figure}[tb]
-\begin{center}
-        \includegraphics[width=3in]{figures/comp_learning_rate/avg_rew_td3.png}
-        \caption{Reward Due to Changes in TD3 Learning Rate}
-        \label{fig:td3_rew}
-\end{center}
-% \vspace{-4mm}
-\end{figure}
+
+%  !!!!!!!!!!!!!!!! !!!!!!!!!!!! !!!!!!!!!!!!! !!!!!!!!!!!!!! 
+% THIS IS NOT THE RIGHT DATA. THE TRAINING SCRIPT DID NOT UPDATE LEARNING RATE.
+
+% \begin{figure}[tb]
+% \begin{center}
+%         \includegraphics[width=3in]{figures/comp_learning_rate/avg_rew_td3.png}
+%         \caption{Reward Due to Changes in TD3 Learning Rate}
+%         \label{fig:td3_rew}
+% \end{center}
+% % \vspace{-4mm}
+% \end{figure}
         
-In the process of this project the effects of learning rate on the PPO and TD3 Algorithms were explored.
-Figures~\ref{fig:ppo_rew} and \ref{fig:td3_rew} show that the Time Steps needed for the PPO algorithm to converge is very sensitive to the choice in learning rate, it also shows that the overall mean and standard deviation of the rewards is sensitive. On the other hand, TD3 does not appear to be as sensitive to changes to the learning rate, at least not in the range of learning rates explored in this study.
+In the process of this project the effects of learning rate on the PPO algorithm was explored to find a value that would allow PPO to perform in a similar manner to TD3. Figure~\ref{fig:ppo_rew} shows that the time steps needed for the PPO algorithm to converge is very sensitive to the choice in learning rate, it also shows that the overall mean and standard deviation of the rewards is sensitive as well.
 
 %%%%%%%%% Update Rate
 \section{Update Rate}
@@ -460,6 +458,6 @@ Figures~\ref{fig:ppo_rew} and \ref{fig:td3_rew} show that the Time Steps needed 
 % \vspace{-4mm}
 \end{figure}
 
-In addition to learning rate the effects of the update rate on PPO was explored. This study found an update rate of one update per 50 time steps to be optimum. The results shown in Figure~\ref{fig:n_steps} show that an update rate of 100 is to slow as the algorithm is unable to converge by the 1000th Time Step. The figure also shows that updating every 10 steps is also a poor choice. This is because the algorithm is forced to make updates on small batch sizes.
+In addition to learning rate the effects of the update rate on PPO was explored. This study found an update rate of one update per 50 time steps to be optimum. The results shown in Figure~\ref{fig:n_steps} show that an update rate of 100 is to slow as the algorithm is unable to converge by the 1000th time step. The figure also shows that updating every 10 steps is also a poor choice. This is because the algorithm is forced to make updates on small batch sizes.
 
 \end{document}

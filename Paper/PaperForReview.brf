@@ -21,10 +21,10 @@
 \backcite {Ha2019j}{{2}{2.3}{subsection.2.3}}
 \backcite {Schaff2019e}{{2}{2.3}{subsection.2.3}}
 \backcite {Blickhan1993a}{{2}{3}{section.3}}
-\backcite {Vaughan2013}{{3}{4}{section.4}}
-\backcite {Sorensen2008CommandinducedVA}{{3}{4}{figure.caption.5}}
-\backcite {Singer:90, Singhose:94a}{{3}{4}{figure.caption.5}}
-\backcite {Vaughan2013}{{3}{4}{figure.caption.6}}
+\backcite {Vaughan2013}{{2}{4}{section.4}}
+\backcite {Sorensen2008CommandinducedVA}{{3}{4}{figure.caption.4}}
+\backcite {Singer:90, Singhose:94a}{{3}{4}{figure.caption.4}}
+\backcite {Vaughan2013}{{3}{4}{figure.caption.5}}
 \backcite {Fujimoto2018d, Schulman2017f}{{3}{5.1}{subsection.5.1}}
 \backcite {stable-baselines3}{{4}{5.1}{subsection.5.1}}
 \backcite {Brockman2016c}{{4}{5.2}{subsection.5.2}}
